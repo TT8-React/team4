@@ -3,19 +3,29 @@ import React from 'react'
 import openBox from '../../assets/Images/open-box.png'
 
 export default function index({ title, imageSrc, onLoad }) {
-    // const ContainerStyle = { backgroundColor: "#D9D9D9", width: "300px", padding: "23px 100px", borderRadius: "10px", display: "flex", flexDirection: "column", gap: "15px" }
-    const Img = ({ src }) => <img alt="" src={imageSrc || openBox} style={{ width: "100px" }} />
+
+    const Img = () => <img alt="" src={imageSrc || openBox} style={{ width: "70px" }} />
+
+    const container = {
+        display: 'flex', flexDirection: "column", alignItems: "center", bgcolor: "#D9D9D9"
+        , width: "310px", borderRadius: "10px", padding: "23px 0", gap: "10px", minHeight: "115px"
+    }
+
+    const containerSkeleton = {
+        display: 'flex', flexDirection: "column", alignItems: "center", gap: "10px"
+    }
 
     return (
-        <Box bgcolor={"#D9D9D9"} width={"300px"} maxHeight={"130px"} borderRadius={"10px"} padding={"23px 0"} gap={"10px"}>
+        <Box {...container}>
 
             {onLoad ?
-                <Box >
-                    {[...new Array(4)].map(_ => <Skeleton style={{ margin: "auto" }} width={"200px"} animation="wave" />)}
+                <Box {...containerSkeleton} >
+                    <Skeleton variant="circular" width={80} height={80} />
+                    <Skeleton variant="rectangular" width={260} height={20} />
                 </Box>
                 : <>
                     <Img src={imageSrc} />
-                    <Typography variant="h6" fontWeight={"800"} children={title || "SEBI report"} />
+                    <Typography variant="h6" fontWeight={"800"} children={title || "Customize report"} />
                 </>
             }
         </Box>
