@@ -2,13 +2,13 @@ import { Box, Skeleton, Typography } from '@mui/material'
 import React from 'react'
 import openBox from '../../assets/Images/open-box.png'
 
-export default function index({ title, imageSrc, onLoad }) {
+export default function index({ title, imageSrc, onLoad, onClick }) {
 
     const Img = () => <img alt="" src={imageSrc || openBox} style={{ width: "70px" }} />
 
     const container = {
         display: 'flex', flexDirection: "column", alignItems: "center", bgcolor: "#D9D9D9"
-        , width: "310px", borderRadius: "10px", padding: "23px 0", gap: "10px", minHeight: "115px"
+        , width: "310px", borderRadius: "10px", padding: "23px 0", gap: "10px", minHeight: "115px", sx: { cursor: "pointer" }
     }
 
     const containerSkeleton = {
@@ -16,7 +16,7 @@ export default function index({ title, imageSrc, onLoad }) {
     }
 
     return (
-        <Box {...container}>
+        <Box {...container} onClick={onClick}>
 
             {onLoad ?
                 <Box {...containerSkeleton} >
