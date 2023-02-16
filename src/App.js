@@ -1,11 +1,12 @@
 
 import './App.css';
-import Tabel from './components/Table';
+
+import TransferList from './components/TransferList';
 
 function App() {
   return (
-    <div className="App">
-      <Tabel/>
+    <div className="App" style={{ height: "93vh" }}>
+      <TransferList />
     </div>
   );
 }
