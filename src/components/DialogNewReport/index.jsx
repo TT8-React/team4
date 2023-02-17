@@ -34,6 +34,9 @@ function checkDates(to, from) {
     return (true);
 }
 
+
+
+
 export default function Index(props) {
     const initValue = { from: "", to: "" }
     const dateRegex = /^([12]\d{3}(\/|-)(0[1-9]|1[0-2])(\/|-)(0[1-9]|[12]\d|3[01]))/
@@ -71,12 +74,16 @@ export default function Index(props) {
             .then(value => {
                 setIsVaild(!value);
                 if (value) {
-                    // handleClose();
-                    // setDataInput(initValue);
-                    // props?.onDone()
+                    handleClose();
+                    setDataInput(initValue);
+                    props?.onDone()
                 }
             })
     };
+
+    const DialogTitleStylr = { fontWeight: 600, border: "1px solid black", borderWidth: "0px 0px 1px 0px", display: "flex", alignItems: "center", justifyContent: "space-between" }
+    const DialogContentStyle = { height: "100px", width: "95%", padding: "10px 8px", display: "flex", alignItems: "center", justifyContent: "space-around" }
+    const DialogActionContainerStyle = { display: "flex", alignItems: "center", justifyContent: "space-around" }
 
     return (
         <div>
@@ -95,17 +102,24 @@ export default function Index(props) {
                 aria-describedby="alert-dialog-description">
 
                 <DialogTitle
-                    sx={{ fontWeight: 600, border: "1px solid black", borderWidth: "0px 0px 1px 0px", display: "flex", alignItems: "center", justifyContent: "space-between" }}
+                    sx={DialogTitleStylr}
                     id="alert-dialog-title" >
                     {"Customize report"}
-                    <IconButton onClick={handleClose} sx={{ background: "red", ":hover": { background: "pink" } }} /></DialogTitle>
-                {isVaild && <Alert onClose={() => { setIsVaild(false) }} severity="warning" children={"Both of inputs requiered as Date!"} />}
+                    <IconButton onClick={handleClose} sx={{ background: "red", ":hover": { background: "pink" } }} />
+                </DialogTitle>
+                {isVaild &&
+                    <Alert
+                        onClose={() => { setIsVaild(false) }}
+                        severity="warning"
+                        children={"Both of inputs requiered as Date!"} />
+                }
 
-                <DialogContent sx={{ height: "100px", width: "95%", padding: "10px 8px", display: "flex", alignItems: "center", justifyContent: "space-around" }}>
+                <DialogContent sx={DialogContentStyle}>
                     <Input id="from" label={"from"} value={dataInput.from} onChange={onChangeData} />
                     <Input id="to" label={"to"} value={dataInput.to} onChange={onChangeData} />
                 </DialogContent>
-                <DialogActions sx={{ display: "flex", alignItems: "center", justifyContent: "space-around" }}>
+
+                <DialogActions sx={DialogActionContainerStyle}>
                     <Button onClick={handleDone} text={"Continue for next step"} />
                 </DialogActions>
             </Dialog>
