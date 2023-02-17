@@ -8,6 +8,7 @@ export default function Index(props) {
     const StyledBox = {
         display: "flex",
         flexDirection: "column",
+        alignItems: "center",
         gap: 5,
         padding: "40px 50px",
         border: "1px solid #000",
