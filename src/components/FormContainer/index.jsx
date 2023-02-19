@@ -9,7 +9,7 @@ export default function Index(props) {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        gap: 2,
+        gap: 5,
         padding: "40px 50px",
         border: "1px solid #000",
         background: "#F8F8F8",

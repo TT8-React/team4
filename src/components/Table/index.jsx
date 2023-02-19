@@ -11,13 +11,20 @@ const tableHeadData = [
   { id: 5, label: "Report5" },
   { id: 6, label: "Report6" },
   { id: 7, label: "Report7" },
-  { id: 8, label: "Action", borderRight: 0 },
+  { id: 8, label: "Action", borderRight: 0,align:"center" },
 ];
 
 const tableCellStyles = {
   padding: "20px",
   width: "12.5%",
   borderRight: "1px solid #828282",
+  borderBottom: "0",
+  fontFamily: 'Inter',
+  fontStyle: 'normal',
+  fontWeight: '400',
+  fontSize: '14px',
+  lineHeight: '18px',
+  color: '#000000',
 };
 
 const tableRowStyles = {
@@ -27,7 +34,7 @@ const tableRowStyles = {
 
 const tableHeaderRowStyles = {
   ...tableRowStyles,
-  bgcolor: "#E5E5E5",
+bgcolor: "#E5E5E5",
 };
 
 const tableActionCellStyles = {
@@ -49,11 +56,13 @@ const tableData = [
 const Tabel = () => {
   return (
     <TableContainer sx={{ width: "90%", margin: "40px auto" }}>
-      <Table sx={{ display: "flex", flexDirection: "column", border: "1px solid #828282" }}>
-        <TableHead sx={{ borderBottom: "1px solid #828282" }}>
+      <Table sx={{ display: "flex", flexDirection: "column", border: "1px solid #828282",borderBottom:"0",borderRadius:"1px" }}>
+        <TableHead sx={{ borderBottom: "1px solid #828282", }}>
           <TableRow sx={tableHeaderRowStyles}>
             {tableHeadData.map((item) => (
-              <TableCell key={item.id} sx={{ ...tableCellStyles, borderRight: item.borderRight !== undefined ? item.borderRight : "1px solid #828282" }}>
+              <TableCell key={item.id} sx={{ ...tableCellStyles, borderRight: item.borderRight !== undefined ? item.borderRight : "1px solid #828282",
+              textAlign: item.align,
+               fontWeight: 700}}>
                 {item.label}
               </TableCell>
             ))}
@@ -61,7 +70,7 @@ const Tabel = () => {
         </TableHead>
         <TableBody>
           {tableData.map((row) => (
-            <TableRow key={row.id} sx={tableRowStyles}>
+            <TableRow key={row.id} sx={{...tableRowStyles,borderBottom:"1px solid #828282"}}>
               <TableCell sx={tableCellStyles}>{row.report}</TableCell>
               <TableCell sx={tableCellStyles}>{row.report}</TableCell>
               <TableCell sx={tableCellStyles}>{row.report}</TableCell>
