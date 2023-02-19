@@ -9,6 +9,7 @@ import PageLink from '../../components/PageLink'
 import Button from '../../components/button'
 import LoadScreen from './LoadScreen'
 import { Box } from '@mui/system';
+import axios from 'axios';
 
 
 const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
@@ -42,16 +43,13 @@ export default function Index() {
     })
 
     async function loginSubmit(data) {
-        return fetch('https://react-tt-api.onrender.com/api/users/signup', {
-            method: 'POST',
-            body: JSON.stringify(data),
-            headers: {
-                'Content-type': 'application/json; charset=UTF-8',
-            },
-        }).catch(err => (err))
-            .then(response => response.json())
-            .then(json => json)
-
+        return (axios({
+            url: 'https://react-tt-api.onrender.com/api/users/signup',
+            method: "POST",
+            data: data,
+        })
+            .then(({ data }) => data))
+            .catch(({ response: { data } }) => data);
     }
 
 
@@ -74,8 +72,14 @@ export default function Index() {
         }).then(async (value) => {
             if (value) {
                 let response = await loginSubmit(value);
-                (response?.message) ? setMsg({ type: msgTypes.warning, text: response.message })
-                    : setMsg({ type: msgTypes.success, text: "Success" })
+                if (response?.message) {
+                    setMsg({ type: msgTypes.warning, text: response.message })
+                }
+                else if (response?.token) {
+                    setMsg({ type: msgTypes.success, text: "Success" })
+                } else {
+                    setMsg({ type: msgTypes.warning, text: "Something went wrong" })
+                }
             }
         }).finally(_ => loadChangeStatus())
 
