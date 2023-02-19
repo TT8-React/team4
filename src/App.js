@@ -1,14 +1,29 @@
-
+import React, { useState } from 'react'
+import ProfileDetails from './pages/ProfileDetails'
 import './App.css';
 
-import TransferList from './components/TransferList';
+export default function App() {
+  const [inputArray, setInputArray] = useState([...new Array(9)].map((_, index) => (
+    {
+      id: index + "",
+      label: `label ${1 + index}`,
+      placeholder: "placeholder",
+      value: "",
+    }
+  )))
 
-function App() {
+  function changeValue({ target: { value, id } }) {
+    setInputArray(prev => prev.map(inp => (id === inp.id) ? ({ ...inp, value }) : (inp)))
+  }
+
+  function onSubmit(e) {
+    e.preventDefault();
+    return (inputArray.map(({ value }) => value));
+  }
+
   return (
-    <div className="App" style={{ height: "93vh" }}>
-      <TransferList />
+    <div style={{ height: "100vh" }}>
+      <ProfileDetails inputArray={inputArray} changeValue={changeValue} onSubmit={onSubmit} />
     </div>
-  );
+  )
 }
-
-export default App;
