@@ -9,7 +9,7 @@ export default function Index({ Links, currentRoute }) {
     const changeRoute = (route) => {
         setCurrent(route)
     }
-    const container = { bgcolor: "#EFEFEF", height: "100%", padding: "25px 50px", display: 'flex', flexDirection: 'column', gap: 5, alignItems: "center" }
+    const container = { bgcolor: "#EFEFEF", height: "100%", padding: "25px 50px", display: 'flex', flexDirection: 'column', gap: 5, alignItems: "left" }
 
 
     return (
