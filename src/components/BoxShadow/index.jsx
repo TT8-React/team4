@@ -15,9 +15,9 @@ export const BoxShadow = (props) => {
 
   return (
     <>
-      <Button variant="contained" color="primary" onClick={handleOpen}>Click</Button>      {/* This is a default button. You can use the previously created component button here */}
+      <Button color="success"  onClick={handleOpen}>{props.children}</Button> {/*The button can be changed to anything else */}
       <Backdrop  open={open} onClick={handleClose}>
-      <div style={{ zIndex: 9999 }}>{props.children}</div>
+      <div style={{ zIndex: 9999 }}>{props.content}</div>
       </Backdrop>
     </>
   );
