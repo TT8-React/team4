@@ -3,6 +3,7 @@ import React from 'react'
 
 import SideBar from "../SideBar"
 import Navbar from "../Navbar/Navbar"
+import { Outlet } from 'react-router-dom'
 
 const Layout = ({pageName, children}) => {
   return (
@@ -12,6 +13,7 @@ const Layout = ({pageName, children}) => {
         </Grid>
         <Grid item xs={5}>
             <Navbar text={pageName} />
+            <Outlet />
             {children}
         </Grid>
     </Grid>
