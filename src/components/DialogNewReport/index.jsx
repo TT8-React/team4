@@ -3,7 +3,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import DetailsBox from '../DetailsBox'
+import TitleInput from '@mui/material/Input';
 import Button from '../button'
 import Input from '../Input'
 import { Alert, IconButton } from '@mui/material';
@@ -38,12 +38,13 @@ function checkDates(to, from) {
 
 
 export default function Index(props) {
+
     const initValue = { from: "", to: "" }
     const dateRegex = /^([12]\d{3}(\/|-)(0[1-9]|1[0-2])(\/|-)(0[1-9]|[12]\d|3[01]))/
 
-    const [open, setOpen] = React.useState(false);
     const [isVaild, setIsVaild] = React.useState(false);
     const [dataInput, setDataInput] = React.useState(initValue);
+    const [title, setTitle] = React.useState("Customize report");
 
     const dataSchema = object({
         from: string()
@@ -60,23 +61,14 @@ export default function Index(props) {
         setDataInput(prev => ({ ...prev, ...change }))
     }
 
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
-
-    const handleClose = () => {
-        setOpen(false);
-    };
-
     const handleDone = () => {
-
         dataSchema.isValid(dataInput, { abortEarly: false, })
             .then(value => {
                 setIsVaild(!value);
                 if (value) {
-                    handleClose();
+                    props.handleClose();
                     setDataInput(initValue);
-                    props?.onDone()
+                    props?.onDone({ title: title || "Customize report", date: dataInput })
                 }
             })
     };
@@ -87,7 +79,7 @@ export default function Index(props) {
 
     return (
         <div>
-            <DetailsBox onClick={handleClickOpen} />
+            {props.Button}
             <Dialog
                 PaperProps={{
                     style: {
@@ -96,8 +88,8 @@ export default function Index(props) {
                         borderRadius: 10
                     }
                 }}
-                open={open}
-                onClose={handleClose}
+                open={props.open}
+                onClose={props.handleClose}
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description">
 
@@ -105,8 +97,14 @@ export default function Index(props) {
                 <DialogTitle
                     sx={DialogTitleStylr}
                     id="alert-dialog-title" >
-                    {"Customize report"}
-                    <IconButton onClick={handleClose} sx={{ background: "red", ":hover": { background: "pink" } }} />
+
+                    <TitleInput
+                        value={title}
+                        onChange={({ target: { value } }) => setTitle(value)}
+                        placeholder="new report title"
+                    />
+
+                    <IconButton onClick={props.handleClose} sx={{ background: "red", ":hover": { background: "pink" } }} />
                 </DialogTitle>
                 {isVaild &&
                     <Alert
