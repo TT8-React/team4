@@ -81,6 +81,7 @@ const TapOne = () => {
             </Grid>
         </Box>
     );
+    
 }
 
 export default TapOne
