@@ -23,7 +23,7 @@ const data = {
 
 export default function Index() {
     return (
-        <div style={{ width: "750px", border: "1px solid #969696", borderRadius: "15px" }}>
+        <div style={{ width: "800px", border: "1px solid #969696", borderRadius: "15px" }}>
             <Bar data={data} style={{ background: "#F9F9F9", borderRadius: "15px" }} />
         </div>
     );

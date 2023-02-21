@@ -109,7 +109,7 @@ export default function Index() {
 
                 <Button onClick={handleSignUp} text={"Log in"} />
 
-                <PageLink title={"Already have an account ?"} navLink={"SignUp"} />
+                <PageLink title={"dont have an account ?"} navLink={"SignUp"}  navRoute={"/register"} />
             </FormContainer>
         </div >
     );

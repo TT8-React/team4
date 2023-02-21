@@ -1,29 +1,33 @@
-import React, { useState } from 'react'
-import ProfileDetails from './pages/ProfileDetails'
-import './App.css';
+import React from 'react'
+import Layout from './components/Layout'
+import LoginPage from './pages/LoginPage'
+import RegisterPage from './pages/RegisterPage'
+import Dashboard from './pages/ChartPage'
+import CompanyDetails from './pages/CompanyDetails'
+import ReportsPage from './pages/ReportsPage'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 export default function App() {
-  const [inputArray, setInputArray] = useState([...new Array(9)].map((_, index) => (
-    {
-      id: index + "",
-      label: `label ${1 + index}`,
-      placeholder: "placeholder",
-      value: "",
-    }
-  )))
-
-  function changeValue({ target: { value, id } }) {
-    setInputArray(prev => prev.map(inp => (id === inp.id) ? ({ ...inp, value }) : (inp)))
-  }
-
-  function onSubmit(e) {
-    e.preventDefault();
-    return (inputArray.map(({ value }) => value));
-  }
 
   return (
-    <div style={{ height: "100vh" }}>
-      <ProfileDetails inputArray={inputArray} changeValue={changeValue} onSubmit={onSubmit} />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route index element={<LoginPage />} />
+        <Route path="*" element={<RegisterPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/Dashboard" element={<Layout />}>
+          <Route index element={<Dashboard />} />
+          <Route path="CompanyDetails" element={<CompanyDetails />} />
+          <Route path="MyReports" element={<ReportsPage />} />
+          <Route path="GRIreport" element={<ReportsPage />} />
+          <Route path="SEBIReport" element={<ReportsPage />} />
+          <Route path="Customizereport" element={<ReportsPage />} />
+          <Route path="DataUpload" element={<ReportsPage />} />
+          <Route path="Environment" element={<Dashboard />} />
+          <Route path="Social" element={<Dashboard />} />
+          <Route path="Governance" element={<Dashboard />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   )
 }

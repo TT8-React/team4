@@ -4,8 +4,7 @@ import { useNavigate } from 'react-router-dom'
 
 export default function Index({ title, navLink, navRoute }) {
 
-    const navigate = null;
-    //  useNavigate()
+    const navigate = useNavigate();
     return (
 
         // title : Text of Link

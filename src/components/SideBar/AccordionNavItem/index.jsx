@@ -29,7 +29,7 @@ export default function Index({ title, current, dropList, changeRoute }) {
                 <Typography {...text} children={title || "Route"} />
             </AccordionSummary >
             <AccordionDetails>
-                {dropList?.map(link => <NavItem key={link.title} onClick={_ => changeRoute(link.route)} current={current} {...link} />)}
+                {dropList?.map(link => <NavItem key={link.title} onClick={_ => changeRoute(link.route, link.title)} current={current} {...link} />)}
             </AccordionDetails>
         </Accordion >
     )
