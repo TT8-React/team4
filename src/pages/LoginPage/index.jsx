@@ -26,8 +26,8 @@ export default function Index() {
     const [load, setLoad] = useState(false)
     const [message, setMsg] = useState('')
     const [inputs, setInputs] = useState([
-        { id: "email", label: "Email Id",type:"email", value: "", placeholder: "Enter Email" },
-        { id: "password", label: "Password",type:"password", value: "", placeholder: "Enter Password" },
+        { id: "email", label: "Email Id", type: "email", value: "", placeholder: "Enter Email" },
+        { id: "password", label: "Password", type: "password", value: "", placeholder: "Enter Password" },
     ])
 
     const loadChangeStatus = () => {
@@ -94,6 +94,7 @@ export default function Index() {
     const InputsGroup =
         <Box sx={{ display: "flex", alignItems: "center", flexDirection: "column", gap: 3 }}>
             {inputs.map(input => <Input onChange={changeInputValue} {...input} key={input.label} />)}
+            <PageLink title={"Forget Password"} navLink={" "} navRoute={"/forgetpassword"} />
         </Box>
 
     return (
@@ -109,7 +110,7 @@ export default function Index() {
 
                 <Button onClick={handleSignUp} text={"Log in"} />
 
-                <PageLink title={"dont have an account ?"} navLink={"SignUp"}  navRoute={"/register"} />
+                <PageLink title={"dont have an account ?"} navLink={"SignUp"} navRoute={"/register"} />
             </FormContainer>
         </div >
     );
