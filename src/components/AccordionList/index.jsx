@@ -61,6 +61,7 @@ export default function AccordionList() {
   const [expanded, setExpanded] = React.useState(false);
 
   const handleChange = (panel) => (event, isExpanded) => {
+    console.log(panel);
     setExpanded(isExpanded ? panel : false);
   };
 
@@ -109,7 +110,29 @@ export default function AccordionList() {
           <StyledTypography >Section B</StyledTypography>
         </StyledAccordionSummary>
         <AccordionDetails>
-          
+        <List>
+            <StyledListItem>
+              <StyledListItemText primary="Company Details" />
+            </StyledListItem>
+            <StyledListItem>
+              <StyledListItemText primary="Products/Services" />
+            </StyledListItem>
+            <StyledListItem>
+              <StyledListItemText primary="Operations" />
+            </StyledListItem>
+            <StyledListItem>
+              <StyledListItemText primary="Employees" />
+            </StyledListItem>
+            <StyledListItem>
+              <StyledListItemText primary="Holding, Subsidiary and Associate ..." />
+            </StyledListItem>
+            <StyledListItem>
+              <StyledListItemText primary="CSR File" />
+            </StyledListItem>
+            <StyledListItem>
+              <StyledListItemText primary="Transparency and Disclosures ..." />
+            </StyledListItem>
+          </List>
         </AccordionDetails>
       </StyledAccordion>
       <StyledAccordion expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
@@ -121,7 +144,29 @@ export default function AccordionList() {
           <StyledTypography >Section C</StyledTypography>
         </StyledAccordionSummary>
         <AccordionDetails>
-          
+        <List>
+            <StyledListItem>
+              <StyledListItemText primary="Company Details" />
+            </StyledListItem>
+            <StyledListItem>
+              <StyledListItemText primary="Products/Services" />
+            </StyledListItem>
+            <StyledListItem>
+              <StyledListItemText primary="Operations" />
+            </StyledListItem>
+            <StyledListItem>
+              <StyledListItemText primary="Employees" />
+            </StyledListItem>
+            <StyledListItem>
+              <StyledListItemText primary="Holding, Subsidiary and Associate ..." />
+            </StyledListItem>
+            <StyledListItem>
+              <StyledListItemText primary="CSR File" />
+            </StyledListItem>
+            <StyledListItem>
+              <StyledListItemText primary="Transparency and Disclosures ..." />
+            </StyledListItem>
+          </List>
         </AccordionDetails>
       </StyledAccordion>
       
