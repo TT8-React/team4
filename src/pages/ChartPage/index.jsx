@@ -8,20 +8,22 @@ import { Box } from '@mui/material'
 export default function index() {
 
     const container = {
-        width: "fit-content",
         height: "100vh",
+        width: "100%",
         display: "flex",
-        justifyContent: "space-around",
-        flexDirection: "column"
+        gap: 5,
+        flexDirection: "column",
+        padding: "10px",
+        boxSizing: "border-box"
     }
 
     return (
         <Box {...container} >
-            <Box display={"flex"} justifyContent="space-between">
+            <Box display={"flex"} justifyContent="space-evenly">
                 <LineChart />
                 <PieChart />
             </Box>
-            <Box display={"flex"}  >
+            <Box display={"flex"} width={"100%"} justifyContent="space-around">
                 <VerticalBarChart />
             </Box>
         </Box>
