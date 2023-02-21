@@ -1,4 +1,4 @@
-import { Grid } from '@mui/material'
+import { Box, Grid } from '@mui/material'
 import React, { useState } from 'react'
 
 import SideBar from "../SideBar"
@@ -82,8 +82,10 @@ const Layout = ({ children }) => {
             </Grid>
             <Grid item xs={5}>
               <Navbar text={pageName} />
-              <Outlet />
-              {children}
+              <Box sx={{minHeight : '95vh'}}>
+                <Outlet />
+                {children}
+              </Box>
             </Grid>
           </Grid>
           : <Navigate to={"/"} />
