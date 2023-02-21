@@ -10,7 +10,7 @@ import Button from '../../components/button'
 import LoadScreen from './LoadScreen'
 import { Box } from '@mui/system';
 import axios from 'axios';
-
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -23,11 +23,13 @@ const initMsg = { type: '', text: '' }
 
 export default function Index() {
 
+    const nav = useNavigate()
+
     const [load, setLoad] = useState(false)
     const [message, setMsg] = useState('')
     const [inputs, setInputs] = useState([
-        { id: "email", label: "Email Id",type:"email", value: "", placeholder: "Enter Email" },
-        { id: "password", label: "Password",type:"password", value: "", placeholder: "Enter Password" },
+        { id: "email", label: "Email Id", type: "email", value: "", placeholder: "Enter Email" },
+        { id: "password", label: "Password", type: "password", value: "", placeholder: "Enter Password" },
     ])
 
     const loadChangeStatus = () => {
@@ -73,10 +75,10 @@ export default function Index() {
                 }
                 else if (response?.token) {
                     setMsg({ type: msgTypes.success, text: "Success" })
-                    console.log(response);
                     localStorage.setItem("token", response.token);
                     localStorage.setItem("name", response.name);
                     localStorage.setItem("admin", response.isAdmin ? "true" : "false");
+                    nav("/Dashboard")
                 } else {
                     setMsg({ type: msgTypes.warning, text: "Something went wrong" })
                 }
@@ -94,6 +96,7 @@ export default function Index() {
     const InputsGroup =
         <Box sx={{ display: "flex", alignItems: "center", flexDirection: "column", gap: 3 }}>
             {inputs.map(input => <Input onChange={changeInputValue} {...input} key={input.label} />)}
+            <PageLink title={"Forget Password"} navLink={" "} navRoute={"/forgetpassword"} />
         </Box>
 
     return (
@@ -109,7 +112,7 @@ export default function Index() {
 
                 <Button onClick={handleSignUp} text={"Log in"} />
 
-                <PageLink title={"dont have an account ?"} navLink={"SignUp"}  navRoute={"/register"} />
+                <PageLink title={"dont have an account ?"} navLink={"SignUp"} navRoute={"/register"} />
             </FormContainer>
         </div >
     );

@@ -3,7 +3,7 @@ import { Alert, } from '@mui/material';
 import { useState } from 'react';
 import { object, string, } from 'yup';
 import FormContainer from '../../components/FormContainer';
-
+import { useNavigate } from 'react-router-dom';
 import Input from '../../components/Input'
 import Button from '../../components/button'
 import LoadScreen from './LoadScreen'
@@ -22,10 +22,12 @@ const initMsg = { type: '', text: '' }
 
 export default function Index() {
 
+    const nav = useNavigate()
+
     const [load, setLoad] = useState(false)
     const [message, setMsg] = useState('')
     const [inputs, setInputs] = useState([
-        { id: "email", label: "Email Id",type:"email", value: "", placeholder: "Enter Email" },
+        { id: "email", label: "Email Id", type: "email", value: "", placeholder: "Enter Email" },
     ])
 
     const loadChangeStatus = () => {
@@ -36,17 +38,6 @@ export default function Index() {
         email: string().required().email(),
     })
 
-    async function loginSubmit(data) {
-        return (axios({
-            url: 'https://react-tt-api.onrender.com/api/users/login',
-            method: "POST",
-            data: data,
-        })
-            .then(({ data }) => data))
-            .catch(({ response: { data } }) => data);
-    }
-
-
     const changeInputValue = ({ target: { id, value } }) => {
         setMsg(initMsg)
         setInputs(prev => prev.map(inp => inp.id === id ? ({ ...inp, value }) : { ...inp }))
@@ -54,8 +45,6 @@ export default function Index() {
 
 
     const handleSignUp = () => {
-        setMsg(initMsg)
-        loadChangeStatus()
 
         formSchema.validate({
             email: inputs[0].value,
@@ -63,21 +52,9 @@ export default function Index() {
             setMsg({ type: msgTypes.warning, text: err.message })
         }).then(async (value) => {
             if (value) {
-                let response = await loginSubmit(value);
-                if (response?.message) {
-                    setMsg({ type: msgTypes.warning, text: response.message })
-                }
-                else if (response?.token) {
-                    setMsg({ type: msgTypes.success, text: "Success" })
-                    console.log(response);
-                    localStorage.setItem("token", response.token);
-                    localStorage.setItem("name", response.name);
-                    localStorage.setItem("admin", response.isAdmin ? "true" : "false");
-                } else {
-                    setMsg({ type: msgTypes.warning, text: "Something went wrong" })
-                }
+                nav("/verification")
             }
-        }).finally(_ => loadChangeStatus())
+        })
 
     }
 
