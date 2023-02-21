@@ -10,6 +10,7 @@ import Button from '../../components/button'
 import LoadScreen from './LoadScreen'
 import { Box } from '@mui/system';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 
 const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
@@ -22,6 +23,8 @@ const initMsg = { type: '', text: '' }
 
 
 export default function Index() {
+
+    const nav = useNavigate()
 
     const [load, setLoad] = useState(false)
     const [message, setMsg] = useState('')
@@ -77,6 +80,7 @@ export default function Index() {
                 }
                 else if (response?.token) {
                     setMsg({ type: msgTypes.success, text: "Success" })
+                    nav("/login")
                 } else {
                     setMsg({ type: msgTypes.warning, text: "Something went wrong" })
                 }
@@ -109,7 +113,7 @@ export default function Index() {
 
                 <Button onClick={handleSignUp} text={"Sign Up"} />
 
-                <PageLink title={"Already have an account ?"} navLink={"Login"} />
+                <PageLink title={"Already have an account ?"} avRoute={"/"} navLink={"Login"} />
             </FormContainer>
         </div >
     );

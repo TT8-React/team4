@@ -2,6 +2,7 @@
 export const ReportBoxContainer = {
     padding: "20px 10px",
     boxSizing: "border-box",
+    height: "100vh"
 }
 export const ButtonBoxContainer = {
     display: "flex",
