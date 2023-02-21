@@ -10,7 +10,7 @@ import Button from '../../components/button'
 import LoadScreen from './LoadScreen'
 import { Box } from '@mui/system';
 import axios from 'axios';
-
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -22,6 +22,8 @@ const initMsg = { type: '', text: '' }
 
 
 export default function Index() {
+
+    const nav = useNavigate()
 
     const [load, setLoad] = useState(false)
     const [message, setMsg] = useState('')
@@ -73,10 +75,10 @@ export default function Index() {
                 }
                 else if (response?.token) {
                     setMsg({ type: msgTypes.success, text: "Success" })
-                    console.log(response);
                     localStorage.setItem("token", response.token);
                     localStorage.setItem("name", response.name);
                     localStorage.setItem("admin", response.isAdmin ? "true" : "false");
+                    nav("/Dashboard")
                 } else {
                     setMsg({ type: msgTypes.warning, text: "Something went wrong" })
                 }
